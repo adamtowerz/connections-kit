@@ -9,6 +9,8 @@ export default function PuzzlePage({ puzzle }: { puzzle: ConnectionsPuzzle }) {
   });
 
   useEffect(() => {
+    document.title = puzzle.title;
+
     // /if puzzle changes, reset state
     setState({ puzzle, guesses: [] });
   }, [puzzle]);
