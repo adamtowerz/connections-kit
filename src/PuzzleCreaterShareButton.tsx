@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { ConnectionsPuzzle } from "./Connections";
 import { encode } from "./PuzzleEncoder";
 import classNames from "classnames";
