@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import {
   ConnectionsPuzzleState,
@@ -18,14 +18,17 @@ export default function PuzzlePlayer({
 }: {
   state: ConnectionsPuzzleState;
   updateState: (s: ConnectionsPuzzleState) => void;
-}) {
-  const words = guessableWords(state);
+  }) {
   const [currentGuess, setCurrentGuess] = useState<string[]>([]);
   const failedGuessesRemaining = getFailedGuessesRemaining(state);
   const isWon = getIsGameWon(state);
   const isLost = getIsGameLost(state);
 
-  const shuffledWords = shuffle(words);
+  const [shuffledWords, setShuffledWords] = useState(shuffle(guessableWords(state)))
+
+  useEffect(() => {
+    setShuffledWords(shuffle(guessableWords(state)))
+  }, [state])
 
   function toggleWord(w: string) {
     if (currentGuess.includes(w)) {
@@ -96,7 +99,7 @@ export default function PuzzlePlayer({
           <button
             key={w}
             type="button"
-            className={classNames("font-serif border p-2, rounded", {
+            className={classNames("font-serif border p-2 rounded text-lg", {
               "bg-gray-800 text-white": currentGuess.includes(w),
             })}
             onClick={() => toggleWord(w)}
