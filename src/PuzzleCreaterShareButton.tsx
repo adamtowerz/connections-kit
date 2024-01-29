@@ -16,7 +16,7 @@ export default function PuzzleCreaterShareButton({
     const puzzleContent = encode(puzzle);
     const origin = window.location.origin;
 
-    const link = `${origin}/puzzle/${puzzleContent}`;
+    const link = `${origin}/puzzle/${encodeURIComponent(puzzleContent)}`;
 
     navigator.clipboard.writeText(link);
     setCopyText(true);
