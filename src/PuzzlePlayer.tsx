@@ -10,6 +10,7 @@ import {
   getIsGameWon,
   getIsGameLost,
 } from "./Connections";
+import { shuffle } from "./utils";
 
 export default function PuzzlePlayer({
   state,
@@ -23,6 +24,8 @@ export default function PuzzlePlayer({
   const failedGuessesRemaining = getFailedGuessesRemaining(state);
   const isWon = getIsGameWon(state);
   const isLost = getIsGameLost(state);
+
+  const shuffledWords = shuffle(words);
 
   function toggleWord(w: string) {
     if (currentGuess.includes(w)) {
@@ -89,7 +92,7 @@ export default function PuzzlePlayer({
       ))}
 
       <div className="grid grid-cols-4 gap-2">
-        {words.map((w) => (
+        {shuffledWords.map((w) => (
           <button
             key={w}
             type="button"
